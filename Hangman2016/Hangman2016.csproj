@@ -49,13 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animator.cs" />
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="Classes\Animator.cs" />
+    <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WordPicker.cs" />
+    <Compile Include="Classes\WordPicker.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\HangmanData.sqlite" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>

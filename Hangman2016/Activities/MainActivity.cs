@@ -67,10 +67,6 @@ namespace Hangman2016
             }
             foreach (Button key in KeyboardButtons)
             {
-                if (!key.HasOnClickListeners)
-                    {
-                        key.Click += Letter_Click;
-                    }
                 key.Visibility=ViewStates.Visible;
                 key.Enabled = true;
             }
@@ -117,6 +113,7 @@ namespace Hangman2016
                         var l = Row.GetChildAt(j);
                         if (l is Button)
                         {
+                            l.Click += Letter_Click;
                             KeyboardButtons.Add((Button)l);
                         }
                     }
