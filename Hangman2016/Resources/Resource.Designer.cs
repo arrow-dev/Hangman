@@ -108,6 +108,9 @@ namespace Hangman2016
 			// aapt resource value: 0x7f050008
 			public const int btnE = 2131034120;
 			
+			// aapt resource value: 0x7f05002b
+			public const int btnEdit = 2131034155;
+			
 			// aapt resource value: 0x7f050009
 			public const int btnF = 2131034121;
 			
@@ -119,6 +122,9 @@ namespace Hangman2016
 			
 			// aapt resource value: 0x7f05000d
 			public const int btnI = 2131034125;
+			
+			// aapt resource value: 0x7f050026
+			public const int btnInsert = 2131034150;
 			
 			// aapt resource value: 0x7f05000e
 			public const int btnJ = 2131034126;
@@ -134,6 +140,9 @@ namespace Hangman2016
 			
 			// aapt resource value: 0x7f050012
 			public const int btnN = 2131034130;
+			
+			// aapt resource value: 0x7f05002a
+			public const int btnNew = 2131034154;
 			
 			// aapt resource value: 0x7f050014
 			public const int btnO = 2131034132;
@@ -171,11 +180,20 @@ namespace Hangman2016
 			// aapt resource value: 0x7f050021
 			public const int btnZ = 2131034145;
 			
+			// aapt resource value: 0x7f05002c
+			public const int button1 = 2131034156;
+			
 			// aapt resource value: 0x7f050023
 			public const int buttonNewGame = 2131034147;
 			
+			// aapt resource value: 0x7f050025
+			public const int editText1 = 2131034149;
+			
 			// aapt resource value: 0x7f050024
 			public const int gridLayout1 = 2131034148;
+			
+			// aapt resource value: 0x7f050027
+			public const int imageView1 = 2131034151;
 			
 			// aapt resource value: 0x7f050000
 			public const int imageViewDisplayImg = 2131034112;
@@ -192,11 +210,17 @@ namespace Hangman2016
 			// aapt resource value: 0x7f05001b
 			public const int keyboardRow4 = 2131034139;
 			
+			// aapt resource value: 0x7f050028
+			public const int lblChoose = 2131034152;
+			
 			// aapt resource value: 0x7f050001
 			public const int linearLayoutDislplayWord = 2131034113;
 			
 			// aapt resource value: 0x7f050002
 			public const int linearLayoutKeyboard = 2131034114;
+			
+			// aapt resource value: 0x7f050029
+			public const int spinnerPlayerSelect = 2131034153;
 			
 			static Id()
 			{
@@ -212,7 +236,16 @@ namespace Hangman2016
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Main = 2130903040;
+			public const int editPlayer = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int Main = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int newPlayer = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int playerSelect = 2130903043;
 			
 			static Layout()
 			{

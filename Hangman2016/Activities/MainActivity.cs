@@ -19,7 +19,7 @@ using Java.Util;
 
 namespace Hangman2016
 {
-    [Activity(Label = "Hangman2016", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Hangman")]
     public class MainActivity : Activity
     {
         private ImageView DisplayImg { get; set; }
