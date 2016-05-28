@@ -37,6 +37,7 @@ namespace Hangman2016.Activities
                 player.Name = input.Text;
                 var dbManager = new DataManager();
                 dbManager.Insert(player);
+                StartActivity(typeof(PlayerSelect));
             }
             else
             {

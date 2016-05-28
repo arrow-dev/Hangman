@@ -123,6 +123,9 @@ namespace Hangman2016
 			// aapt resource value: 0x7f05000f
 			public const int btnH = 2131034127;
 			
+			// aapt resource value: 0x7f05002f
+			public const int btnHiScores = 2131034159;
+			
 			// aapt resource value: 0x7f050010
 			public const int btnI = 2131034128;
 			
@@ -185,9 +188,6 @@ namespace Hangman2016
 			
 			// aapt resource value: 0x7f050024
 			public const int btnZ = 2131034148;
-			
-			// aapt resource value: 0x7f05002f
-			public const int button1 = 2131034159;
 			
 			// aapt resource value: 0x7f050026
 			public const int buttonNewGame = 2131034150;

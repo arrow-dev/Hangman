@@ -19,7 +19,7 @@ namespace Hangman2016.Activities
     {
         private Button New;
         private Button Edit;
-
+        private Button HighScores;
         private Spinner PlayerSelector;
         private List<Player> Players { get; set; }
         private ArrayAdapter MyAdapter { get; set; }
@@ -33,12 +33,19 @@ namespace Hangman2016.Activities
             New.Click += New_Click;
             Edit = FindViewById<Button>(Resource.Id.btnEdit);
             Edit.Click += Edit_Click;
+            HighScores = FindViewById<Button>(Resource.Id.btnHiScores);
+            HighScores.Click += HighScores_Click;
             PlayerSelector = FindViewById<Spinner>(Resource.Id.spinnerPlayerSelect);
             PlayerSelector.ItemSelected += PlayerSelector_ItemSelected;
             // Create your application here
             Players = GetPlayerList();
             MyAdapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, Players);
             PlayerSelector.Adapter = MyAdapter;
+        }
+
+        private void HighScores_Click(object sender, EventArgs e)
+        {
+            StartActivity(typeof(MainActivity));
         }
 
         private void PlayerSelector_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
