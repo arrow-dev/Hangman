@@ -14,9 +14,10 @@ using Newtonsoft.Json;
 
 namespace Hangman2016.Activities
 {
-    [Activity(Label = "PlayerSelect", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Player Select", MainLauncher = true, Icon = "@drawable/icon")]
     public class PlayerSelect : Activity
     {
+        private Button Play;
         private Button New;
         private Button Edit;
         private Button HighScores;
@@ -29,6 +30,8 @@ namespace Hangman2016.Activities
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.playerSelect);
+            Play = FindViewById<Button>(Resource.Id.btnPlay);
+            Play.Click += Play_Click;
             New = FindViewById<Button>(Resource.Id.btnNew);
             New.Click += New_Click;
             Edit = FindViewById<Button>(Resource.Id.btnEdit);
@@ -43,15 +46,22 @@ namespace Hangman2016.Activities
             PlayerSelector.Adapter = MyAdapter;
         }
 
+        private void Play_Click(object sender, EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(MainActivity));
+            intent.PutExtra("UserProfile", JsonConvert.SerializeObject(SelectedPlayer));
+            StartActivity(intent);
+        }
+
         private void HighScores_Click(object sender, EventArgs e)
         {
-            StartActivity(typeof(MainActivity));
+            StartActivity(typeof(HighScores));
         }
 
         private void PlayerSelector_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             SelectedPlayer = Players[e.Position];
-            Toast.MakeText(this, SelectedPlayer.Name, ToastLength.Short).Show();
+            Play.Enabled = true;
         }
 
         private List<Player> GetPlayerList()

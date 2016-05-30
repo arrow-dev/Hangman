@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace Hangman2016.Activities
 {
-    [Activity(Label = "EditPlayer")]
+    [Activity(Label = "Edit Player")]
     public class EditPlayer : Activity
     {
         private EditText Name;

@@ -44,5 +44,11 @@ namespace Hangman2016.Classes
 
             return players;
         }
+
+	    public List<Player> GetHighScoreList()
+	    {
+	        var hiScoreList = db.Query<Player>("SELECT * FROM Players ORDER BY HighScore DESC LIMIT 10");
+	        return hiScoreList;
+	    }
 	}
 }

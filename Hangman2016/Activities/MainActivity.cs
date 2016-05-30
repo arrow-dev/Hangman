@@ -14,14 +14,17 @@ using Android.OS;
 using Android.Provider;
 using Android.Text.Method;
 using Android.Views.InputMethods;
+using Hangman2016.Classes;
 using Java.IO;
 using Java.Util;
+using Newtonsoft.Json;
 
 namespace Hangman2016
 {
     [Activity(Label = "Hangman")]
     public class MainActivity : Activity
     {
+        private Player PlayerProfile { get; set; }
         private ImageView DisplayImg { get; set; }
         private LinearLayout DisplayWord{ get; set; }
         private Button MyButton { get; set; }
@@ -31,12 +34,20 @@ namespace Hangman2016
         private string Word { get; set; }
         private Animator MyAnimator { get; set; }
         private List<Button> KeyboardButtons { get; set; }
+        private int WordScore { get; set; }
+        private int LossPoints { get; set; }
+        private TextView Score { get; set; }
+        private DataManager myDataManager;
 
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
+            PlayerProfile = JsonConvert.DeserializeObject<Player>(Intent.GetStringExtra("UserProfile"));
+            myDataManager =new DataManager();
+            Score = FindViewById<TextView>(Resource.Id.Score);
+            Score.Text = "Player Score: " + PlayerProfile.HighScore;
             DisplayImg = FindViewById<ImageView>(Resource.Id.imageViewDisplayImg);
             DisplayWord = FindViewById<LinearLayout>(Resource.Id.linearLayoutDislplayWord);
             BtnNewGame = FindViewById<Button>(Resource.Id.buttonNewGame);
@@ -60,6 +71,9 @@ namespace Hangman2016
             DisplayImg.SetImageResource(MyAnimator.GetNextResource());
             WordPicker myWordPicker = new WordPicker(WordList);
             Word = myWordPicker.GetRandomWord();
+            Score s = new Score();
+            WordScore = s.GetScore(Word);
+            LossPoints = 10;
             DisplayWord.RemoveAllViews();
             foreach (var letter in Word)
             {
@@ -82,6 +96,8 @@ namespace Hangman2016
             {
                 key.Visibility = ViewStates.Gone;
             }
+            myDataManager.Update(PlayerProfile);
+            Score.Text = "Player Score: " + PlayerProfile.HighScore;
         }
 
         private bool CheckIfComplete()
@@ -140,18 +156,22 @@ namespace Hangman2016
                 }
                 if (correctGuess)
                 {
+                    WordScore += 2;
                     if (CheckIfComplete())
                     {
-                        Toast.MakeText(this, "you win!", ToastLength.Long).Show();
+                        Toast.MakeText(this, "you win! +" + WordScore + "points!", ToastLength.Long).Show();
+                        PlayerProfile.HighScore += WordScore;
                         GameFinished();
                     }
                 }
                 else
                 {
+                    WordScore -= 1;
                     DisplayImg.SetImageResource(MyAnimator.GetNextResource());
                     if (MyAnimator.EndOfResources)
                     {
-                        Toast.MakeText(this, "you lose! the word was " + Word, ToastLength.Long).Show();
+                        Toast.MakeText(this, "you lose! -" + LossPoints + "\n the word was " + Word, ToastLength.Long).Show();
+                        PlayerProfile.HighScore -= LossPoints;
                         GameFinished();
                     }
                 }

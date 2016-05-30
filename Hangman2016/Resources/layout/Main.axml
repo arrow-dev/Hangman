@@ -5,6 +5,12 @@
     android:layout_height="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px">
+    <TextView
+        android:text="Player Score:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Score" />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -172,12 +178,13 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/keyboardRow4">
+            android:id="@+id/keyboardRow4"
+            android:layout_gravity="center_horizontal">
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/btnBlank"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:enabled="false" />
             <Button
                 android:text="V"
                 android:layout_width="wrap_content"
@@ -211,8 +218,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/btnBlank2"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:enabled="false" />
         </LinearLayout>
     </LinearLayout>
     <Button

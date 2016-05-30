@@ -14,7 +14,7 @@ using Hangman2016.Classes;
 
 namespace Hangman2016.Activities
 {
-    [Activity(Label = "AddPlayer")]
+    [Activity(Label = "Add Player")]
     public class AddPlayer : Activity
     {
         private EditText input;
