@@ -1,13 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Hangman2016.Classes;
 
@@ -17,7 +10,7 @@ namespace Hangman2016.Activities
     public class HighScores : Activity
     {
         private ListView MyListView;
-        private List<Player> MyList; 
+        private List<Player> MyList;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

@@ -11,7 +11,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtInput" />
+        android:id="@+id/txtInput"
+        android:inputType="textNoSuggestions" />
     <Button
         android:text="Save"
         android:layout_width="match_parent"

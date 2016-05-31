@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using Android.App;
-using Android.Content;
-using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Android.Provider;
 using Android.Text.Method;
-using Android.Views.InputMethods;
 using Hangman2016.Classes;
-using Java.IO;
-using Java.Util;
 using Newtonsoft.Json;
 
 namespace Hangman2016

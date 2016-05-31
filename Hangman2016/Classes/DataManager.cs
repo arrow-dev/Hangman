@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using SQLite;
 using System.IO;
-using Javax.Crypto.Interfaces;
 
 namespace Hangman2016.Classes
 {

@@ -6,7 +6,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editPlayerName" />
+        android:id="@+id/editPlayerName"
+        android:inputType="textNoSuggestions" />
     <Button
         android:text="Update"
         android:layout_width="match_parent"
