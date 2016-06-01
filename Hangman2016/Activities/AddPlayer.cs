@@ -18,11 +18,11 @@ namespace Hangman2016.Activities
             input = FindViewById<EditText>(Resource.Id.txtInput);
             save = FindViewById<Button>(Resource.Id.btnInsert);
             save.Click += Save_Click;
-            // Create your application here
         }
 
         private void Save_Click(object sender, EventArgs e)
         {
+            //There is text create new Player object and add to database, else prompt user to enter a name.
             if (input.Text != "")
             {
                 var player = new Player();

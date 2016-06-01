@@ -29,15 +29,16 @@ namespace Hangman2016
         private int WordScore { get; set; }
         private int LossPoints { get; set; }
         private TextView Score { get; set; }
-        private DataManager myDataManager;
+        private DataManager MyDataManager { get; set; }
 
 
         protected override void OnCreate(Bundle bundle)
         {
+            //Initialize views, set up list of words from file, set up keyboard and start game.
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             PlayerProfile = JsonConvert.DeserializeObject<Player>(Intent.GetStringExtra("UserProfile"));
-            myDataManager =new DataManager();
+            MyDataManager =new DataManager();
             Score = FindViewById<TextView>(Resource.Id.Score);
             Score.Text = "Player Score: " + PlayerProfile.HighScore;
             DisplayImg = FindViewById<ImageView>(Resource.Id.imageViewDisplayImg);
@@ -45,6 +46,7 @@ namespace Hangman2016
             BtnNewGame = FindViewById<Button>(Resource.Id.buttonNewGame);
             BtnNewGame.Click += BtnNewGame_Click;
             WordList = new List<string>();
+            LossPoints = 10;
             Stream myStream = Assets.Open("Words.txt");
             StreamReader myReader = new StreamReader(myStream);
             while (!myReader.EndOfStream)
@@ -56,8 +58,56 @@ namespace Hangman2016
             NewGame();
         }
 
+        //MAIN GAME LOGIC:
+        private void Letter_Click(object sender, EventArgs e)
+        {
+            //When a letter button is clicked create a reference to it by casting the sender object to a button, then get the text from the button and disable it.
+            Button clickedButton = (Button)sender;
+            String Letter = clickedButton.Text;
+            clickedButton.Enabled = false;
+
+            //If letter matches any the the DisplayWord's TextView's text property then remove the password mask and set correctGuess bool to true.
+            bool correctGuess = false;
+            for (int i = 0; i < DisplayWord.ChildCount; i++)
+            {
+                TextView myTextView = (TextView)DisplayWord.GetChildAt(i);
+                if (myTextView.Text == Letter.ToLower())
+                {
+                    myTextView.TransformationMethod = null;
+                    correctGuess = true;
+                }
+            }
+            //If it was a correct guess then add points and check if the word is complete, if so then the player wins.
+            if (correctGuess)
+            {
+                WordScore += 2;
+                if (CheckIfComplete())
+                {
+                    //WIN CONDITION alert the player, update profile score and call GameFinished method.
+                    Toast.MakeText(this, "YOU WIN! +" + WordScore + "points!", ToastLength.Long).Show();
+                    PlayerProfile.HighScore += WordScore;
+                    GameFinished();
+                }
+            }
+            else
+            //Guess was wrong, decrement points, call the animator to get next image, if animatator is out of images the player loses.
+            {
+                WordScore -= 1;
+                DisplayImg.SetImageResource(MyAnimator.GetNextResource());
+                if (MyAnimator.EndOfResources)
+                {
+                    //LOSE CONDITION alert the player, update profile score and call GameFinished method.
+                    Toast.MakeText(this, "YOU LOSE! -" + LossPoints + "points!\nThe word was " + Word, ToastLength.Long).Show();
+                    PlayerProfile.HighScore -= LossPoints;
+                    GameFinished();
+                }
+            }
+
+        }
+
         private void NewGame()
         {
+            //This method resets the Animator and then calls it to get the starting image, gets a new word and word score, sets up views for new word and resets the keyboard buttons.
             BtnNewGame.Visibility = ViewStates.Invisible;
             MyAnimator = new Animator();
             DisplayImg.SetImageResource(MyAnimator.GetNextResource());
@@ -65,7 +115,6 @@ namespace Hangman2016
             Word = myWordPicker.GetRandomWord();
             Score s = new Score();
             WordScore = s.GetScore(Word);
-            LossPoints = 10;
             DisplayWord.RemoveAllViews();
             foreach (var letter in Word)
             {
@@ -78,22 +127,22 @@ namespace Hangman2016
             }
         }
 
-        
-
         private void GameFinished()
         {
+            //When game is finished enable the New Game button, hide the keyboard, update the database and update the score label.
             BtnNewGame.Visibility = ViewStates.Visible;
             BtnNewGame.Background = new ColorDrawable(Color.Red);
             foreach (Button key in KeyboardButtons)
             {
                 key.Visibility = ViewStates.Gone;
             }
-            myDataManager.Update(PlayerProfile);
+            MyDataManager.Update(PlayerProfile);
             Score.Text = "Player Score: " + PlayerProfile.HighScore;
         }
 
         private bool CheckIfComplete()
         {
+            //Check if any Text Views in the DisplayWord linear layoout still have their text masked by the PasswordWordTransformation method. If any letters are still hidden word is not complete.
             bool complete = true;
             for (int i = 0; i < DisplayWord.ChildCount; i++)
             {
@@ -109,6 +158,7 @@ namespace Hangman2016
 
         private void KeyboardSetup()
         {
+            //Loop through each KeyboardRow linear layout and for each button in the row assign a click event handler and add the button to a List of keyboard buttons.
             LinearLayout Keyboard = FindViewById<LinearLayout>(Resource.Id.linearLayoutKeyboard);
             for (int i = 0; i < Keyboard.ChildCount; i++)
             {
@@ -129,49 +179,9 @@ namespace Hangman2016
             }
         }
 
-        private void Letter_Click(object sender, EventArgs e)
-        {
-            Button clickedButton = (Button) sender;
-            String Letter = clickedButton.Text;
-            if (Letter != "")
-            {
-                clickedButton.Enabled = false;
-                bool correctGuess = false;
-                for (int i = 0; i < DisplayWord.ChildCount; i++)
-                {
-                    TextView myTextView = (TextView)DisplayWord.GetChildAt(i);
-                    if (myTextView.Text == Letter.ToLower())
-                    {
-                        myTextView.TransformationMethod = null;
-                        correctGuess = true;
-                    }
-                }
-                if (correctGuess)
-                {
-                    WordScore += 2;
-                    if (CheckIfComplete())
-                    {
-                        Toast.MakeText(this, "you win! +" + WordScore + "points!", ToastLength.Long).Show();
-                        PlayerProfile.HighScore += WordScore;
-                        GameFinished();
-                    }
-                }
-                else
-                {
-                    WordScore -= 1;
-                    DisplayImg.SetImageResource(MyAnimator.GetNextResource());
-                    if (MyAnimator.EndOfResources)
-                    {
-                        Toast.MakeText(this, "you lose! -" + LossPoints + "\n the word was " + Word, ToastLength.Long).Show();
-                        PlayerProfile.HighScore -= LossPoints;
-                        GameFinished();
-                    }
-                }
-            }
-        }
-
         private void BtnNewGame_Click(object sender, EventArgs e)
         {
+            //Click handler for new game button.
             NewGame();
         }
     }

@@ -13,6 +13,7 @@ namespace Hangman2016.Activities
         private List<Player> MyList;
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            //Get a list of top 10 players ordered by score, pass it to the custom listview adapter and attach the adapter to the listview.
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.highScores);
             var db = new DataManager();

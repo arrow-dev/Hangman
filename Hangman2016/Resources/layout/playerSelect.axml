@@ -23,8 +23,7 @@
         android:text="Play"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnPlay"
-        android:enabled="false" />
+        android:id="@+id/btnPlay" />
     <Button
         android:text="New Player"
         android:layout_width="match_parent"

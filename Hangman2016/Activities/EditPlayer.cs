@@ -28,7 +28,6 @@ namespace Hangman2016.Activities
             SelectedPlayer = JsonConvert.DeserializeObject<Player>(Intent.GetStringExtra("UserProfile"));
             Name.Text = SelectedPlayer.Name;
             myDataManager=new DataManager();
-            // Create your application here
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -39,9 +38,18 @@ namespace Hangman2016.Activities
 
         private void Update_Click(object sender, EventArgs e)
         {
-            SelectedPlayer.Name = Name.Text;
-            myDataManager.Update(SelectedPlayer);
-            StartActivity(typeof(PlayerSelect));
+            //Allow user to change Player name, check if there is text before updating the database, else prompt user to enter a name.
+            if (Name.Text != "")
+            {
+                SelectedPlayer.Name = Name.Text;
+                myDataManager.Update(SelectedPlayer);
+                StartActivity(typeof(PlayerSelect));
+            }
+            else
+            {
+                Toast.MakeText(this, "Please enter your name!", ToastLength.Short).Show();
+            }
+            
         }
     }
 }
