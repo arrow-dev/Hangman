@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Hangman2016
 {
+    //Pass in a list of words to initialize.
     public class WordPicker
     {
         private List<string> Wordlist { get; set; }
@@ -12,6 +13,7 @@ namespace Hangman2016
             Wordlist = list;
         }
 
+        //Call this method to get a random word from the list.
         public string GetRandomWord()
         {
             int randomIndex = new Random().Next(Wordlist.Count);

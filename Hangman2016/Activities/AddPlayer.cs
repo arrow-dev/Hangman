@@ -20,9 +20,9 @@ namespace Hangman2016.Activities
             save.Click += Save_Click;
         }
 
+        //There is text create new Player object and add to database, else prompt user to enter a name.
         private void Save_Click(object sender, EventArgs e)
         {
-            //There is text create new Player object and add to database, else prompt user to enter a name.
             if (input.Text != "")
             {
                 var player = new Player();

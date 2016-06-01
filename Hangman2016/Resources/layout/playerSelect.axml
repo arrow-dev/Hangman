@@ -8,7 +8,8 @@
         android:src="@drawable/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView1" />
+        android:id="@+id/imageView1"
+        android:adjustViewBounds="true" />
     <TextView
         android:text="Select your profile or create a new one."
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -17,13 +18,16 @@
         android:id="@+id/lblChoose" />
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinnerPlayerSelect" />
+        android:layout_height="40dp"
+        android:id="@+id/spinnerPlayerSelect"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp" />
     <Button
         android:text="Play"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnPlay" />
+        android:id="@+id/btnPlay"
+        android:layout_marginTop="10dp" />
     <Button
         android:text="New Player"
         android:layout_width="match_parent"
@@ -39,4 +43,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnHiScores" />
+    <Button
+        android:text="Add Test Players"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnTestPlayers" />
 </LinearLayout>

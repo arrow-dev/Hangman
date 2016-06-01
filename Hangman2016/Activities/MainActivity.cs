@@ -32,9 +32,9 @@ namespace Hangman2016
         private DataManager MyDataManager { get; set; }
 
 
+        //Initialize views, set up list of words from file, set up keyboard and start game.
         protected override void OnCreate(Bundle bundle)
         {
-            //Initialize views, set up list of words from file, set up keyboard and start game.
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             PlayerProfile = JsonConvert.DeserializeObject<Player>(Intent.GetStringExtra("UserProfile"));
@@ -105,9 +105,9 @@ namespace Hangman2016
 
         }
 
+        //This method resets the Animator and then calls it to get the starting image, gets a new word and word score, sets up views for new word and resets the keyboard buttons.
         private void NewGame()
         {
-            //This method resets the Animator and then calls it to get the starting image, gets a new word and word score, sets up views for new word and resets the keyboard buttons.
             BtnNewGame.Visibility = ViewStates.Invisible;
             MyAnimator = new Animator();
             DisplayImg.SetImageResource(MyAnimator.GetNextResource());
@@ -127,9 +127,9 @@ namespace Hangman2016
             }
         }
 
+        //When game is finished enable the New Game button, hide the keyboard, update the database and update the score label.
         private void GameFinished()
         {
-            //When game is finished enable the New Game button, hide the keyboard, update the database and update the score label.
             BtnNewGame.Visibility = ViewStates.Visible;
             BtnNewGame.Background = new ColorDrawable(Color.Red);
             foreach (Button key in KeyboardButtons)
@@ -140,9 +140,9 @@ namespace Hangman2016
             Score.Text = "Player Score: " + PlayerProfile.HighScore;
         }
 
+        //Check if any Text Views in the DisplayWord linear layoout still have their text masked by the PasswordWordTransformation method. If any letters are still hidden word is not complete.
         private bool CheckIfComplete()
         {
-            //Check if any Text Views in the DisplayWord linear layoout still have their text masked by the PasswordWordTransformation method. If any letters are still hidden word is not complete.
             bool complete = true;
             for (int i = 0; i < DisplayWord.ChildCount; i++)
             {
@@ -156,9 +156,9 @@ namespace Hangman2016
             return complete;
         }
 
+        //Loop through each KeyboardRow linear layout and for each button in the row assign a click event handler and add the button to a List of keyboard buttons.
         private void KeyboardSetup()
         {
-            //Loop through each KeyboardRow linear layout and for each button in the row assign a click event handler and add the button to a List of keyboard buttons.
             LinearLayout Keyboard = FindViewById<LinearLayout>(Resource.Id.linearLayoutKeyboard);
             for (int i = 0; i < Keyboard.ChildCount; i++)
             {
@@ -179,9 +179,9 @@ namespace Hangman2016
             }
         }
 
+        //Click handler for new game button.
         private void BtnNewGame_Click(object sender, EventArgs e)
         {
-            //Click handler for new game button.
             NewGame();
         }
     }

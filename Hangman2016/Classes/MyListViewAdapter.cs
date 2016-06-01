@@ -5,6 +5,7 @@ using Android.Widget;
 
 namespace Hangman2016.Classes
 {
+    //CUSTOM ADAPTER FOR HIGH SCORES LIST
 	class MyListViewAdapter : BaseAdapter<Player>
 	{
 	    private List<Player> mIList;

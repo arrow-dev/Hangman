@@ -36,9 +36,9 @@ namespace Hangman2016.Activities
             StartActivity(typeof(PlayerSelect));
         }
 
+        //Allow user to change Player name, check if there is text before updating the database, else prompt user to enter a name.
         private void Update_Click(object sender, EventArgs e)
         {
-            //Allow user to change Player name, check if there is text before updating the database, else prompt user to enter a name.
             if (Name.Text != "")
             {
                 SelectedPlayer.Name = Name.Text;

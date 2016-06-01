@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SQLite;
 using System.IO;
@@ -9,7 +10,8 @@ namespace Hangman2016.Classes
 	    private string dbPath { get; set; }
 	    private SQLiteConnection db { get; set; }
 
-	    public DataManager()
+        //Sets up a SQLITE database on the device and creates a table if it doesnt already exist.
+        public DataManager()
 	    {
             dbPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "database.db3");
             db = new SQLiteConnection(dbPath);
@@ -31,6 +33,7 @@ namespace Hangman2016.Classes
 	        db.Delete(player);
 	    }
 
+        //Get a list of all players from the database.
         public List<Player> GetAllPlayers()
         {
             List<Player> players = new List<Player>();
@@ -43,10 +46,23 @@ namespace Hangman2016.Classes
             return players;
         }
 
+        //Get a list of top ten players and order descending.
         public List<Player> GetHighScoreList()
 	    {
 	        var hiScoreList = db.Query<Player>("SELECT * FROM Players ORDER BY HighScore DESC LIMIT 10");
 	        return hiScoreList;
+	    }
+
+        //create any number of test players with random scores for testing purposes.
+        public void addTestPlayers(int numberOf)
+	    {
+	        for (int i = 0; i < numberOf; i++)
+	        {
+	            var p = new Player();
+	            p.Name = "test player " + i;
+	            p.HighScore = new Random().Next(500);
+	            db.Insert(p);
+	        }
 	    }
 	}
 }

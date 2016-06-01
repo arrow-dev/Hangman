@@ -1,11 +1,14 @@
 namespace Hangman2016.Classes
 {
+
+    //SCRABBLE SCORING
     class Score
     {
         public Score()
         {
         }
 
+        //Pass in a word and get the score.
         public int GetScore(string word)
         {
             int score = 0;
